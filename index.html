@@ -3,22 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>..حاسبه القيمه المضافه من فاتوره شامله القيمه المضافه في السعوديه</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>حاسبه القيمة المضافة من اجمالي الفاتورة الشاملة للقيمة المضافة في السعودية</title>
+    
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8518698171035931" crossorigin="anonymous"></script>
+
+    <!-- Inline CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .ads-container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>حاسبه القيمه المضافه من فاتوره شامله القيمه المضافه في السعوديه</h1>
+        <h1>VAT Calculator</h1>
         <form id="vat-form">
-            <label for="total-amount">Total Amount (Including VAT):</label>
+            <label for="total-amount">Total Amount:</label>
             <input type="number" id="total-amount" step="any" required>
-            <button type="submit">Calculate</button>
+            <button type="submit">Calculate VAT</button>
         </form>
         <div id="result" class="hidden">
             <p>VAT Amount: <span id="vat-amount"></span></p>
             <p>Amount Before VAT: <span id="amount-before-vat"></span></p>
         </div>
     </div>
-    <script src="script.js"></script>
+    
+    <!-- Google AdSense Ad Unit -->
+    <div class="ads-container">
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-8518698171035931",
+                enable_page_level_ads: true
+            });
+        </script>
+    </div>
+    
+    <!-- Inline JavaScript -->
+    <script>
+        document.getElementById('vat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const totalAmountStr = document.getElementById('total-amount').value;
+            const totalAmount = parseFloat(totalAmountStr.replace(',', '.'));
+            
+            if (isNaN(totalAmount) || totalAmount <= 0) {
+                alert('Please enter a valid total amount');
+                return;
+            }
+            
+            const vatRate = 15; // Fixed VAT rate
+            const vatAmount = (totalAmount * vatRate) / (100 + vatRate);
+            const amountBeforeVAT = totalAmount - vatAmount;
+            
+            document.getElementById('vat-amount').textContent = vatAmount.toFixed(2);
+            document.getElementById('amount-before-vat').textContent = amountBeforeVAT.toFixed(2);
+            
+            document.getElementById('result').classList.remove('hidden');
+        });
+    </script>
 </body>
 </html>
